@@ -1,5 +1,11 @@
 #pragma once
+#include <vector>
+#include <unordered_map>
+#include<array>
 
+/*gauss_sum(ull k)
+finds the sum of all integers from 0 until including k-1
+returns the sum*/
 unsigned long long gauss_sum(unsigned long long k) {
 	//return the sum of ints from 0,1,2... until including (k-1)
 	// it is also a variation of Gauss's sum formula which he invented in elementary school
@@ -8,7 +14,10 @@ unsigned long long gauss_sum(unsigned long long k) {
 	return sum;
 }
 
-
+/*uneven_sum(ull k)
+finds the sum of uneven integers from 0 until including k-1
+returns the sum
+*/
 unsigned long long uneven_sum(unsigned long long k) {
 	//find the sum of uneven ints from 0 until including (k-1)
 	// apparently this is the correct formula
@@ -26,6 +35,8 @@ unsigned long long uneven_sum(unsigned long long k) {
 	return sum;
 }
 
+
+/*simple test function to test the uneven_sum*/
 unsigned long long loop_uneven(unsigned long long k) {
 	unsigned long long sum = 0;
 	for (unsigned long long i = 1; i < k; i++) {
@@ -36,6 +47,9 @@ unsigned long long loop_uneven(unsigned long long k) {
 	return sum;
 }
 
+
+
+/*simple test function to test the gauss sum*/
 unsigned long long loop_sum(unsigned long long k) {
 	unsigned long long sum = 0;
 
@@ -45,6 +59,13 @@ unsigned long long loop_sum(unsigned long long k) {
 	return sum;
 }
 
+
+/*isMultiple(ull n, ullm)
+checks if the n-variable is a multiple of m-variable
+i.e.
+n=i*m where i is integer
+return bool
+*/
 bool isMultiple(unsigned long long n, unsigned long long m){
 	//check if n is multiple of m
 	// n = i * m
@@ -66,16 +87,22 @@ bool isMultiple(unsigned long long n, unsigned long long m){
 
 }
 
-
+/*isEven(int k)
+checks if the number was even, without using modulo or division
+i.e.
+you check the 0eth bit with bitmask and bitwiseAND
+return bool*/
 bool isEven(int k){
 	//return ttrue for even, false for uneven
 	//check divisible by two without division
-	//just check what is the 0eth bit value with bitwise and
+	//just check what is the 0eth bit value with bitwiseAND
 	bool res;
 	res = (0 == (k & 0x1));
 	return res;
 }
 
+/*creates 2D matrix and fills it with some values
+and prints it*/
 void printArray( size_t row,  size_t column ){
 
 //allocate memory
@@ -105,8 +132,12 @@ void printArray( size_t row,  size_t column ){
 }
 
 
+/*powTwo(ull exponent)
+calculates powers of two
+i.e.
+2^(exponent)
+returns result*/
 unsigned long long powTwo( unsigned long long exponent){
-
 	//exponents of the same base
 	//   a^n * a^m = a^(n+m)
 	// however we must check if n+m = 0
@@ -121,9 +152,12 @@ unsigned long long powTwo( unsigned long long exponent){
 	}
 }
 
+
+/*containsEvenProduct(int*, size_t len)
+checks if the function finds a pair of numbers, whose product is an even number
+returns bool*/
 bool containsEvenProduct(int arr[], size_t len){
 	//check if you find a pair of integers whose product is even,
-
 /*iterate from start
 does it contain only zeroes => true because 0 is even
 does it contain only 1s => false
@@ -154,4 +188,69 @@ does it contain any odd number and any even number =>return true
 			return false; //couldnt find any even numbers in arr
 		}
 	}
+}
+
+
+
+/*isUnique(vector<int>vec)
+checks if the vector has only unique elements
+return bool*/
+bool isUnique(std::vector<int> vec) {
+	//make unorderedmap from vector
+	//iterate vector and put into map,
+	//check the count of them???
+	//if more than 1 then notUnique
+	//has increased memoryrequirement, but should be usually 
+	//fastest time requirement
+	if (vec.size() ==  0 || vec.size() == 1) {
+		return true;
+	}
+	std::unordered_map<int, int> occurrences;
+	for (size_t i = 0; i < vec.size(); i++) {
+		if (++occurrences[ vec[i] ] > 1)
+			return false;
+	}
+
+	return true;
+}
+
+
+
+/*printOddValues(vector<int>vec)
+prints the odd valued elements of the vector*/
+void printOddValues(std::vector<int>vec) {
+	for (size_t i = 0; i < vec.size(); i++) {
+		int candidate = vec[i];
+		if (!isEven(candidate)) {
+			std::cout << candidate;
+		}
+	}
+	std::cout << std::endl;
+}
+
+/*fischer yates shuffle of an int array*/
+void randomize(int arr[], size_t len) {
+	//seed at program start
+	//fischer yates shuffle
+	//loop the array, and get random index from 0 to i including => into j
+	//swap arr[j] arr[i]
+	if (len <= 1) {
+		//nothing
+	} else {
+		for (int i = len - 1; i > 0; i--) {
+			int r = rand();
+			int j =  r % (i+1);
+			std::swap(arr[i], arr[j]);
+		}
+	}
+}
+
+
+/*
+generate all the random permutations of the
+characters of the string and print them
+use only each character once*/
+void permuteString(std::string str) {
+
+
 }

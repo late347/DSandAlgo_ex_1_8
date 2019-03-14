@@ -388,3 +388,56 @@ TEST(containEvenProd, test12) {
 	EXPECT_EQ(res, true);
 	EXPECT_TRUE(true);
 }
+
+
+TEST(isUnique, test1) {
+	std::vector<int> vec = { -8, -1, 0 };
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, true);
+	EXPECT_TRUE(true);
+}
+
+TEST(isUnique, test2) {
+	std::vector<int> vec = { -8, 0, 2, 5, 8, 8, 7 };
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, false);
+	EXPECT_TRUE(true);
+}
+
+TEST(isUnique, test3) {
+	std::vector<int> vec = { -8, 0, 2, 5, 8, 7 };
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, true);
+	EXPECT_TRUE(true);
+}
+
+
+TEST(isUnique, test4) {
+	std::vector<int> vec = { -8};
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, true);
+	EXPECT_TRUE(true);
+}
+
+TEST(isUnique, test5) {
+	std::vector<int> vec = { };
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, true);
+	EXPECT_TRUE(true);
+}
+
+TEST(isUnique, test6) {
+	std::vector<int> vec = {2, 2};
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, false);
+	EXPECT_TRUE(true);
+}
+
+
+
+TEST(isUnique, test7) {
+	std::vector<int> vec = { 1,2 };
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, true);
+	EXPECT_TRUE(true);
+}

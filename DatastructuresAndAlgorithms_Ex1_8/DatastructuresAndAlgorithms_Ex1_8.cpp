@@ -12,12 +12,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Header.h"
-
+#include<time.h>
 
 using namespace std;
 
 int main()
 {
+
+	srand(time(NULL));//randomize seed
+
+
 	//visual studio simple way of checking if there were memory leaks,
 	//you gotta use crtMemDump and compare the heap memory allocations that way?
 	_CrtMemState memory; // C/C++ runtime memory management state storage
@@ -35,7 +39,10 @@ int main()
 
 	printArray(2,3);
 
-
+	int arr[2] = { 1, 2 };
+	randomize(arr, 2);
+	
+	
 
 	if (_CrtDumpMemoryLeaks()) // check if there were memory leaks
 		std::cout << "YOU HAVE MEMORY LEAK!!\n" << std::endl;
