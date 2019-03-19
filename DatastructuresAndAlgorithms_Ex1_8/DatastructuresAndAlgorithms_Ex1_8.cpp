@@ -14,6 +14,7 @@
 #include "Header.h"
 #include<time.h>
 
+
 using namespace std;
 
 int main()
@@ -42,8 +43,7 @@ int main()
 	int arr[2] = { 1, 2 };
 	randomize(arr, 2);
 	
-	
-
+	classicPermute();
 	if (_CrtDumpMemoryLeaks()) // check if there were memory leaks
 		std::cout << "YOU HAVE MEMORY LEAK!!\n" << std::endl;
 	else

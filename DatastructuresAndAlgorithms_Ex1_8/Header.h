@@ -2,7 +2,9 @@
 #include <vector>
 #include <unordered_map>
 #include<array>
-
+#include<iostream>
+#include <string>
+#include <algorithm>
 /*gauss_sum(ull k)
 finds the sum of all integers from 0 until including k-1
 returns the sum*/
@@ -247,10 +249,110 @@ void randomize(int arr[], size_t len) {
 
 
 /*
-generate all the random permutations of the
-characters of the string and print them
-use only each character once*/
-void permuteString(std::string str) {
+generate all the permutations of a uniqueStr
+and print them
+based on classic algorithm from literature apparently
+seems to work at least for small size strings (N=4)*/
+//void permuteString() {
+////given a unique string,
+////generate permutations from the uniques
+////print them
+//	std::string str0("abcd");
+//
+//	/* initial str shall be 1st permutation
+//	--must make n-1 swaps into the str
+//	--start from left to right, swapping
+//	--when you end, start over from beginning and swap again
+//	--end when having done n-1 swaps*/
+//	std::cout << str0 << std::endl;
+//
+//	int amountSwaps = 24 - 1; //must be (N!)-1 == swapsAmount
+//	// NOTE!!! to make the program more responsive, we could store an array of amountOfSwaps
+//	// in static variable memory(or global variable), so that we dont need to compute the factorial, 
+//	// which itself is purely based on str.length = N
+//	// we dont really need the factorial for anything except for getting correct amount of iterations
+//	// so having a reasonable amount of precomputed factorials in an array would be good
+//	// then just access array based on string length
+//	int i = 0;
+//	int rowLimit = str0.length() - 1;
+//	int iterations = 1;
+//
+//	while (iterations <= amountSwaps) {
+//		if (i+1 >= rowLimit) {
+//			std::swap(str0[i], str0[i+1]);
+//			std::cout << str0 << std::endl;
+//			i = 0;
+//			
+//		} else {
+//			std::swap(str0[i], str0[i+1]);
+//			std::cout << str0 << std::endl;
+//			i++;
+//		}
+//		iterations++;
+//	}
+//	int kakka; //for debug breakpoint only!!!
+//}
 
+
+int findNextBiggest(const std::string & str) {
+	//inputs will have to be unique and sorted string/sequence smallest to biggest
+	int k = 0, ind = 0;
+	int validInd = -1;
+	for (k; k < str.length()-1; k++) {
+		if (str[k] < str[k+1]) {
+			validInd = k;
+		}
+	}	
+	return validInd;
+}
+
+int findSwapInd(int k, const std::string & str) {
+	int maxInd = k+1;
+	int compVal = str[k];
+
+	//find largest ind greater than k, such that
+	// a[k] < a[ind]
+	for (int i = k+1; i < str.length(); i++) {
+		if (str[i] > compVal)
+			maxInd = i;
+	}
+	
+	return maxInd;
+}
+
+void reverseSubstring(int startInd,  std::string & str) {
+	reverse( (str.begin()+startInd), str.end() );
+}
+
+
+/*based on lexicographical permutation algorithm from wikipedia
+phew, this was a tough problem to do, when I tried to do it without
+using googling at first! But then I googled some algorithms for permutations
+
+seems to work for small sizes of unique strings: N=2, N=3,*/
+void classicPermute() {
+	std::string str("abc");
+	int k = 0, ind = 0;
+	//scan the array to find largest k, such that a[k] < a[k+1]
+//	if not found it was last permutation
+	//else continue
+	/*
+	find largest ind such that a[k]<a[ind], swap them
+	start from a[k+1] to until final elevement and reverse that part
+	then you have new permutation
+	*/
+	std::cout << str << std::endl; //initial string is the first permutation
+	bool keepGoing = true;
+	while (keepGoing) {
+		k = findNextBiggest(str);
+		if (k==-1) {
+			keepGoing = false;
+		} else {
+			ind = findSwapInd(k, str);
+			std::swap(str[ind], str[k]);
+			reverseSubstring(k+1, str);
+			std::cout << str << std::endl;
+		}
+	}
 
 }
