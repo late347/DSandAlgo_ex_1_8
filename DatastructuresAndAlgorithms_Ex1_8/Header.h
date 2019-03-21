@@ -68,7 +68,7 @@ i.e.
 n=i*m where i is integer
 return bool
 */
-bool isMultiple(unsigned long long n, unsigned long long m){
+bool isMultiple(unsigned long long n, unsigned long long m) {
 	//check if n is multiple of m
 	// n = i * m
 	if (n == 0 || m == 0) {
@@ -94,7 +94,7 @@ checks if the number was even, without using modulo or division
 i.e.
 you check the 0eth bit with bitmask and bitwiseAND
 return bool*/
-bool isEven(int k){
+bool isEven(int k) {
 	//return ttrue for even, false for uneven
 	//check divisible by two without division
 	//just check what is the 0eth bit value with bitwiseAND
@@ -105,17 +105,17 @@ bool isEven(int k){
 
 /*creates 2D matrix and fills it with some values
 and prints it*/
-void printArray( size_t row,  size_t column ){
+void printArray(size_t row, size_t column) {
 
-//allocate memory
+	//allocate memory
 	int**mA = new  int *[row];
 
 	for (size_t i = 0; i < row; i++) {
 		mA[i] = new   int[column];
 	}
 
-// make the matrix
-//print matrix line by line
+	// make the matrix
+	//print matrix line by line
 	int element = 0;
 	for (size_t i = 0; i < row; i++) {
 		for (size_t j = 0; j < column; j++) {
@@ -126,7 +126,7 @@ void printArray( size_t row,  size_t column ){
 		std::cout << std::endl;
 	}
 
-//dealloc
+	//dealloc
 	for (size_t i = 0; i < row; i++) {
 		delete[]mA[i];
 	}
@@ -139,7 +139,7 @@ calculates powers of two
 i.e.
 2^(exponent)
 returns result*/
-unsigned long long powTwo( unsigned long long exponent){
+unsigned long long powTwo(unsigned long long exponent) {
 	//exponents of the same base
 	//   a^n * a^m = a^(n+m)
 	// however we must check if n+m = 0
@@ -147,10 +147,10 @@ unsigned long long powTwo( unsigned long long exponent){
 
 	if (exponent == 0) {
 		return 1;
-	} else if(exponent % 2 == 0){ //for even powers of two
+	} else if (exponent % 2 == 0) { //for even powers of two
 		return (powTwo(exponent / 2) * (powTwo(exponent / 2)));
 	} else {
-		return ( 2 * (powTwo(exponent / 2) * (powTwo(exponent / 2)))  );
+		return (2 * (powTwo(exponent / 2) * (powTwo(exponent / 2))));
 	}
 }
 
@@ -158,7 +158,7 @@ unsigned long long powTwo( unsigned long long exponent){
 /*containsEvenProduct(int*, size_t len)
 checks if the function finds a pair of numbers, whose product is an even number
 returns bool*/
-bool containsEvenProduct(int arr[], size_t len){
+bool containsEvenProduct(int arr[], size_t len) {
 	//check if you find a pair of integers whose product is even,
 /*iterate from start
 does it contain only zeroes => true because 0 is even
@@ -204,12 +204,12 @@ bool isUnique(std::vector<int> vec) {
 	//if more than 1 then notUnique
 	//has increased memoryrequirement, but should be usually 
 	//fastest time requirement
-	if (vec.size() ==  0 || vec.size() == 1) {
+	if (vec.size() == 0 || vec.size() == 1) {
 		return true;
 	}
 	std::unordered_map<int, int> occurrences;
 	for (size_t i = 0; i < vec.size(); i++) {
-		if (++occurrences[ vec[i] ] > 1)
+		if (++occurrences[vec[i]] > 1)
 			return false;
 	}
 
@@ -241,7 +241,7 @@ void randomize(int arr[], size_t len) {
 	} else {
 		for (int i = len - 1; i > 0; i--) {
 			int r = rand();
-			int j =  r % (i+1);
+			int j = r % (i + 1);
 			std::swap(arr[i], arr[j]);
 		}
 	}
@@ -298,30 +298,30 @@ int findNextBiggest(const std::string & str) {
 	//inputs will have to be unique and sorted string/sequence smallest to biggest
 	int k = 0, ind = 0;
 	int validInd = -1;
-	for (k; k < str.length()-1; k++) {
-		if (str[k] < str[k+1]) {
+	for (k; k < str.length() - 1; k++) {
+		if (str[k] < str[k + 1]) {
 			validInd = k;
 		}
-	}	
+	}
 	return validInd;
 }
 
 int findSwapInd(int k, const std::string & str) {
-	int maxInd = k+1;
+	int maxInd = k + 1;
 	int compVal = str[k];
 
 	//find largest ind greater than k, such that
 	// a[k] < a[ind]
-	for (int i = k+1; i < str.length(); i++) {
+	for (int i = k + 1; i < str.length(); i++) {
 		if (str[i] > compVal)
 			maxInd = i;
 	}
-	
+
 	return maxInd;
 }
 
-void reverseSubstring(int startInd,  std::string & str) {
-	reverse( (str.begin()+startInd), str.end() );
+void reverseSubstring(int startInd, std::string & str) {
+	reverse((str.begin() + startInd), str.end());
 }
 
 
@@ -345,14 +345,56 @@ void classicPermute() {
 	bool keepGoing = true;
 	while (keepGoing) {
 		k = findNextBiggest(str);
-		if (k==-1) {
+		if (k == -1) {
 			keepGoing = false;
 		} else {
 			ind = findSwapInd(k, str);
 			std::swap(str[ind], str[k]);
-			reverseSubstring(k+1, str);
+			reverseSubstring(k + 1, str);
 			std::cout << str << std::endl;
 		}
+	}
+
+}
+
+/*coded without optimizations,
+I remember having seen gcd algorithm described with optimizations
+in the Cormen Leiserson Rivers Stein book*/
+int greatestCommonDivisor(int n, int m) {
+	//corner cases gcd(0,0) == 0 *COVERED*
+	// gcd(9,0) or gcd(9,0) == 9 *COVERED*
+	// gcd(-3,9) == 3 'hopefully covered by unit testing'
+	// gcd(5,5) == 5 *COVERED*
+	// gcd(-3,-3) == 3 *COVERED*
+
+
+	if (n == 0 && m == 0) { //both == 0
+		return 0;
+	} else if (n == 0 || m == 0) { // (m or n) == 0
+		if (m == 0) {
+			return abs(n);
+		}else {
+			return abs(m);
+		}
+	} else if (m == n) { // n==m
+		return abs(m);
+	} else if (m < 0 && n > 0) {
+		m *= (-1);
+	} else if (n < 0 && m > 0) {
+		n *= (-1);
+	} else if (n < 0 && m < 0) {
+		n *= (-1);
+		m *= (-1);
+	}
+
+	if (n < m) {
+		std::swap(n, m);
+	}
+
+	if (n % m == 0) {
+		return m;
+	} else {
+		greatestCommonDivisor(m, (n % m));
 	}
 
 }

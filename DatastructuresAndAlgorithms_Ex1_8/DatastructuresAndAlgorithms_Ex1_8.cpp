@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "Header.h"
 #include<time.h>
+#include "mVector.h"
 
 
 using namespace std;
@@ -42,8 +43,25 @@ int main()
 
 	int arr[2] = { 1, 2 };
 	randomize(arr, 2);
-	
+	std::cout << "gcd(7,2)=="<<greatestCommonDivisor(7,2)<<std::endl;
+
+	std::cout << "permutations were" << std::endl;
 	classicPermute();
+	std::cout << std::endl;
+
+	mVector a(3, 3);
+	mVector b(4, 4);
+
+	std::cout << (3 * a) <<std::endl; //ok
+	std::cout <<  (b * 2) << std::endl;//ok
+	std::cout << (b * a) << std::endl; //ok
+	std::cout << (a - b) << std::endl; //ok
+	std::cout << (b = (-1*b)) << std::endl; //ok
+	std::cout << (a = a * (-(sqrt(2)))) << std::endl; //ok
+
+	mVector c(a);
+	std::cout << c+c << std::endl; //ok
+
 	if (_CrtDumpMemoryLeaks()) // check if there were memory leaks
 		std::cout << "YOU HAVE MEMORY LEAK!!\n" << std::endl;
 	else

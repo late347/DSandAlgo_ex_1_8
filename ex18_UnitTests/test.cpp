@@ -432,7 +432,12 @@ TEST(isUnique, test6) {
 	EXPECT_EQ(res, false);
 	EXPECT_TRUE(true);
 }
-
+TEST(isUnique, test8) {
+	std::vector<int> vec = { 1,2,3,1 };
+	bool res = isUnique(vec);
+	EXPECT_EQ(res, false);
+	EXPECT_TRUE(true);
+}
 
 
 TEST(isUnique, test7) {
@@ -441,3 +446,95 @@ TEST(isUnique, test7) {
 	EXPECT_EQ(res, true);
 	EXPECT_TRUE(true);
 }
+
+TEST(gcd, test1) {
+	int n = 9, m = 2;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 1);
+	EXPECT_TRUE(true);
+}
+
+
+TEST(gcd, test2) {
+	int n = 2, m = 9;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 1);
+	EXPECT_TRUE(true);
+}
+
+TEST(gcd, test3) {
+	int n = 9, m = 9;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 9);
+	EXPECT_TRUE(true);
+}
+
+
+TEST(gcd, test4) {
+	int n = -9, m = -9;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 9);
+	EXPECT_TRUE(true);
+}
+
+
+TEST(gcd, test5) {
+	int n = -9, m = 2;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 1);
+	EXPECT_TRUE(true);
+}
+
+TEST(gcd, test6) {
+	int n = 2, m = -9;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 1);
+	EXPECT_TRUE(true);
+}
+
+TEST(gcd, test7) {
+	int n = -9, m = 0;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 9);
+	EXPECT_TRUE(true);
+}
+
+TEST(gcd, test8) {
+	int n = 0, m = -9;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 9);
+	EXPECT_TRUE(true);
+}
+
+
+TEST(gcd, test9) {
+	int n = -5, m = -9;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 1);
+	EXPECT_TRUE(true);
+}
+
+TEST(gcd, test10) {
+	int n = -9, m = -5;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 1);
+	EXPECT_TRUE(true);
+}
+
+
+TEST(gcd, test11) {
+	int n = 0, m = 31;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 31);
+	EXPECT_TRUE(true);
+}
+
+TEST(gcd, test12) {
+	int n = 31, m = 0;
+	auto res = greatestCommonDivisor(n, m);
+	EXPECT_EQ(res, 31);
+	EXPECT_TRUE(true);
+}
+
+
+
